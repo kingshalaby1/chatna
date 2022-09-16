@@ -1,2 +1,6 @@
+<div id="rooms"><%= for room <- @rooms do %>
+  <div class="room"><%= room.title %></div>
+<% end %>
+</div>
 <div id="messages" role="log" aria-live="polite"></div>
 <input id="chat-input" type="text">

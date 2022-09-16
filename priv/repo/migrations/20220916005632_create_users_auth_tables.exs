@@ -5,11 +5,13 @@ defmodule Chatna.Repo.Migrations.CreateUsersAuthTables do
     execute "CREATE EXTENSION IF NOT EXISTS citext", ""
 
     create table(:users) do
+      add :username, :string
       add :email, :citext, null: false
       add :hashed_password, :string, null: false
       add :confirmed_at, :naive_datetime
       timestamps()
     end
+    create index(:users, [:username])
 
     create unique_index(:users, [:email])
 

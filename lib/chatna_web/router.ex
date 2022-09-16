@@ -11,6 +11,7 @@ defmodule ChatnaWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
+    plug :put_user_token
   end
 
   pipeline :api do
@@ -75,9 +76,12 @@ defmodule ChatnaWeb.Router do
   scope "/", ChatnaWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+
+
   end
 
   scope "/", ChatnaWeb do
