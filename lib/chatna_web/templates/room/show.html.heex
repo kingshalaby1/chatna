@@ -1,0 +1,24 @@
+<div style="float: left; width: 200px">
+
+<div id="rooms"><%= for room <- @rooms do %>
+  <div class="room"><%= link room.title, to: Routes.room_path(@conn, :show, room.id) %></div>
+<% end %>
+</div>
+</div>
+
+
+<div style="width: 550px; float: left">
+<h2> chatting with <%=@room_title %></h2> 
+<div id="messages" role="log" aria-live="polite">
+
+<%= for msg <- @messages do %>
+<% IO.inspect({msg.user_id, @user.id}) %>
+  <div class={if msg.user_id == @user.id do "out-bound" else "in-bound" end <> " message"}>
+    <span> [<%= msg.inserted_at %>] </span> 
+    <span> <%= msg.body %></span>
+  </div>
+<% end %>
+</div>
+<input id="chat-input" type="text">
+
+</div>

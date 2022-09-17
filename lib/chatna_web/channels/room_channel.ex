@@ -10,10 +10,10 @@ defmodule ChatnaWeb.RoomChannel do
     {:error, %{reason: "unauthorized"}}
   end
 
-  def handle_in("new_msg", %{"body" => body} = m, socket) do
-    IO.inspect(socket)
-    # {:ok, msg} = Messaging.save_message(m)
-    broadcast!(socket, "server_msg", %{body: body})
+  def handle_in("new_msg", %{"body" => body, "room_id" => room_id} = m, socket) do
+    IO.inspect(m)
+    {:ok, msg} = Messaging.create_message(%{user_id: socket.assigns.current_user, body: body, room_id: room_id})
+    broadcast!(socket, "server_msg", %{message: %{body: msg.body, user_id: msg.user_id, inserted_at: msg.inserted_at}, current_user_id: socket.assigns.current_user})
     {:noreply, socket}
   end
 end

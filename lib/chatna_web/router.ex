@@ -81,6 +81,9 @@ defmodule ChatnaWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
+    get "/r", RoomController, :index
+    get "/r/:id",  RoomController, :show
+
 
   end
 

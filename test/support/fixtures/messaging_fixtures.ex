@@ -22,4 +22,18 @@ defmodule Chatna.MessagingFixtures do
 
     room
   end
+
+  @doc """
+  Generate a message.
+  """
+  def message_fixture(attrs \\ %{}) do
+    {:ok, message} =
+      attrs
+      |> Enum.into(%{
+        body: "some body"
+      })
+      |> Chatna.Messaging.create_message()
+
+    message
+  end
 end

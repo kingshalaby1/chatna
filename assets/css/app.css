@@ -118,3 +118,29 @@
   0% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+.message.in-bound{
+  float: right;
+  background-color: #ebccd1;
+}
+.message.out-bound{
+  float: left;
+  background-color: #bce8f1;
+}
+
+.message.in-bound span{float: right;}
+    
+.message{
+  border: 1px solid #888;
+  width: 90%;
+  margin: 3px;
+  padding: 2px
+  
+}
+
+.message span{margin: 0 3px}
+
+.message:last-child{
+  margin-bottom: 20px;
+  
+}

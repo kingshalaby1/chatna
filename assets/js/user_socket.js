@@ -61,14 +61,24 @@ let messagesContainer = document.querySelector('#messages')
 
 chatInput.addEventListener('keypress', event => {
   if (event.key === 'Enter') {
-    channel.push('new_msg', { body: chatInput.value })
+    let pathArray = window.location.pathname.split('/')
+    // console.log(pathArray)
+    channel.push('new_msg', { body: chatInput.value, room_id: pathArray[2] })
     chatInput.value = ''
   }
 })
 
 channel.on('server_msg', payload => {
-  let messageItem = document.createElement('p')
-  messageItem.innerText = `[${Date()}] ${payload.body}`
+  let messageItem = document.createElement('div')
+  messageItem.classList.add('message')
+  if (payload.message.user_id == payload.user_id) {
+    messageItem.classList.add('in-bound')
+  } else {
+    messageItem.classList.add('out-bound')
+  }
+
+  let date = new Date()
+  messageItem.innerText = `[${date.getUTCHours()}:${date.getUTCMinutes()}] ${payload.message.body}`
   messagesContainer.appendChild(messageItem)
 })
 
